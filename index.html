@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Statystyki  Noblock</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #121212; color: #fff; padding: 20px; }
+        h1 { text-align: center; color: #4CAF50; }
+        table { width: 80%; margin: 20px auto; border-collapse: collapse; background: #1e1e1e; }
+        th, td { padding: 12px; border: 1px solid #333; text-align: center; }
+        th { background: #333; color: #4CAF50; }
+        tr:nth-child(even) { background: #252525; }
+    </style>
+</head>
+<body>
+
+    <h1>Statystyki Bloków na Noblock</h1>
+    
+    <table id="statsTable">
+        <thead>
+            <tr>
+                <th>Gracz</th>
+                <th>Wykopane Bloki</th>
+                <th>Postawione Bloki</th>
+                <th>Czas Gry</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Tutaj JavaScript wstrzyknie dane -->
+        </tbody>
+    </table>
+
+    <script>
+        // Pobieramy plik stats.json, który będzie aktualizowany na GitHubie
+        fetch('stats.json')
+            .then(response => response.json())
+            .then(data => {
+                const tbody = document.querySelector('#statsTable tbody');
+                tbody.innerHTML = '';
+                
+                data.forEach(player => {
+                    const row = `<tr>
+                        <td>${player.name}</td>
+                        <td>${player.mined}</td>
+                        <td>${player.placed}</td>
+                        <td>${player.playtime}</td>
+                    </tr>`;
+                    tbody.innerHTML += row;
+                });
+            })
+            .catch(error => console.error('Błąd ładowania statystyk:', error));
+    </script>
+
+</body>
+</html>
